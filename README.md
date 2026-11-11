@@ -1,5 +1,21 @@
 # SmileSuite
 
+## Local coursework verification — 11 November 2026
+
+The restored Laravel + Directus + Shopify demo passed fresh verification: **148 PHP tests / 773 assertions**, **all six browser workflows with the real local CMS enabled**, frontend production build, and Blade template compilation. This verifies the local synthetic-data demo; external Shopify checkout and live Stripe payments are not established by these checks.
+
+The current demo runs at [SmileSuite](http://smilesuite.localhost:8001), [Harbor](http://harbor.smilesuite.localhost:8001/login), and [Cedar](http://cedar.smilesuite.localhost:8001/login). Directus runs at [the CMS editor](http://127.0.0.1:8055/admin). Port 8001 bypasses an unrelated Python file server answering on port 8000 on this machine. The scripts' default remains 8000; use `./scripts/start-local.ps1 -Port 8001` when that port conflict is present.
+
+See [fresh verification and remaining submission items](docs/coursework/VERIFICATION.md#fresh-local-verification--11-november-2026). The instructor invitation still needs the instructor's GitHub username. No new commit, push, invitation, or production deployment was performed.
+
+## Current decision — 3 November 2026
+
+The user approved the headless CMS approach and requested return to the previous system: **Laravel + Directus headless CMS + Shopify retail**. WordPress Multisite/WooCommerce is no longer the active target. Its dated implementation and QA evidence remain historical; reverting documentation does not prove application or runtime rollback completion.
+
+Confirmed subscription decision: **PHP 2,490/month or PHP 24,900/year per clinic location**, with monthly/annual Stripe/Cashier billing retained. Earlier price examples below are historical and do not establish configured provider prices. Keep live billing, live commerce and real-patient-data flags false; synthetic data only. Headless approval records the user's decision, not independently verified formal rubric approval. Submission remains November 9.
+
+The original documentation below describes the previous implementation and its dated evidence. Test counts retain their original dates; they are not fresh rollback verification.
+
 **Students:** Kenji B. Rique and Samuael D. Luz  
 **Program / Year / Section:** Bachelor of Science in Information Technology (BSIT), III F1  
 **Courses:** Web Systems and Technologies 2; System Integration and Architecture 1

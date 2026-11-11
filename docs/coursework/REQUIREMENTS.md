@@ -1,5 +1,13 @@
 # Coursework requirement audit
 
+## Current decision — 3 November 2026
+
+The user approved the headless CMS approach and requested return to the previous system: **Laravel + Directus headless CMS + Shopify retail**. WordPress Multisite/WooCommerce is no longer the active target. Its dated implementation and QA evidence remain historical; reverting documentation does not prove application or runtime rollback completion.
+
+Confirmed subscription decision: **PHP 2,490/month or PHP 24,900/year per clinic location**, with monthly/annual Stripe/Cashier billing retained. Earlier price examples below are historical and do not establish configured provider prices. Keep live billing, live commerce and real-patient-data flags false; synthetic data only. Headless approval records the user's decision, not independently verified formal rubric approval. Submission remains November 9.
+
+The original documentation below describes the previous implementation and its dated evidence. Test counts retain their original dates; they are not fresh rollback verification.
+
 Sources read in full: `FINAL PROJECT REQUIREMENTS.docx` (Web Systems and Technologies 2 / System Integration and Architecture 1) and `Git_Lab2_Finals.pdf` (two pages, Laboratory Activity No. 2 – Finals). Source files are retained unchanged in the user's Downloads directory.
 
 ## Final project

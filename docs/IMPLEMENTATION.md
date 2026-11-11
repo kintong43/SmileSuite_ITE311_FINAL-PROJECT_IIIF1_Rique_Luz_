@@ -1,5 +1,13 @@
 # SmileSuite implementation and evidence
 
+## Current decision — 3 November 2026
+
+The user approved the headless CMS approach and requested return to the previous system: **Laravel + Directus headless CMS + Shopify retail**. WordPress Multisite/WooCommerce is no longer the active target. Its dated implementation and QA evidence remain historical; reverting documentation does not prove application or runtime rollback completion.
+
+Confirmed subscription decision: **PHP 2,490/month or PHP 24,900/year per clinic location**, with monthly/annual Stripe/Cashier billing retained. Earlier price examples below are historical and do not establish configured provider prices. Keep live billing, live commerce and real-patient-data flags false; synthetic data only. Headless approval records the user's decision, not independently verified formal rubric approval. Submission remains November 9.
+
+The original documentation below describes the previous implementation and its dated evidence. Test counts retain their original dates; they are not fresh rollback verification.
+
 Status: local synthetic-data MVP implemented from `smilesuite_system_plan_v2.md`. This record separates working application behavior from production and provider approvals. The original download was read and copied into `docs/`; it was not modified. The requested folder was empty and had no Git repository.
 
 ## Delivered application
