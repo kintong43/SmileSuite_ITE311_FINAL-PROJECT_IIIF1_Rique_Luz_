@@ -42,3 +42,9 @@ Thumbs.db
 *.pem
 *.key
 *.zip
+
+# Local AI-tooling files
+/AGENTS.md
+/CLAUDE.md
+/boost.json
+/docs/superpowers/
