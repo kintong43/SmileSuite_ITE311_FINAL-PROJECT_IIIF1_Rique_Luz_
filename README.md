@@ -43,8 +43,6 @@ After seeding, open `http://smilesuite.localhost:8000` (platform), `http://harbo
 
 ## Clone and run
 
-For repository and upload details, see [GitHub handoff](docs/GITHUB.md).
-
 Prerequisites: PHP 8.4 with `pdo_pgsql`, `intl`, `mbstring`, `zip` and `bcmath`; Composer 2; Node 24; and PostgreSQL 16 with `btree_gist` available. The repository includes application source and lockfiles. Install dependencies locally after cloning.
 
 ```sh

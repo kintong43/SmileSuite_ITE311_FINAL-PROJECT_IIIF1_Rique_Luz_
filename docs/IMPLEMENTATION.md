@@ -69,7 +69,7 @@ The archive is inside ignored `.runtime/backups/`; no real patient records were 
 
 ## Review and corrections
 
-An independent source review identified account-switch MFA reuse, historical encounter writes outside current scope, and persisted grace flags outliving expiry. Follow-up review identified an ignored-field MFA throttle bypass, discarded dated-block offsets, and a duplicate encounter-note version error. Regression tests reproduced and then verified corrections. Root additionally added session token stamps because deleting database session rows alone does not revoke Redis/file-backed sessions. `docs/REVIEW.md` retains findings and resolution notes.
+An independent source review identified account-switch MFA reuse, historical encounter writes outside current scope, and persisted grace flags outliving expiry. Follow-up review identified an ignored-field MFA throttle bypass, discarded dated-block offsets, and a duplicate encounter-note version error. Regression tests reproduced and then verified corrections. Root additionally added session token stamps because deleting database session rows alone does not revoke Redis/file-backed sessions.
 
 Automated dashboard accessibility checks initially found low-contrast secondary text. Text colors and size were adjusted; mobile checks exposed an absolutely positioned table label escaping its scroll container, which was fixed at the container. The browser suite includes automated WCAG-tagged checks, keyboard skip-link behavior, labeled login controls and 390-pixel reflow. This is sampled automated evidence, not a whole-product manual accessibility assessment or certification.
 
