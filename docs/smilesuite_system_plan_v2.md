@@ -1,5 +1,13 @@
 # SmileSuite: B2B SaaS System and Implementation Plan — v2
 
+## Current decision — 3 November 2026
+
+The user approved the headless CMS approach and requested return to the previous system: **Laravel + Directus headless CMS + Shopify retail**. WordPress Multisite/WooCommerce is no longer the active target. Its dated implementation and QA evidence remain historical; reverting documentation does not prove application or runtime rollback completion.
+
+Confirmed subscription decision: **PHP 2,490/month or PHP 24,900/year per clinic location**, with monthly/annual Stripe/Cashier billing retained. Earlier price examples below are historical and do not establish configured provider prices. Keep live billing, live commerce and real-patient-data flags false; synthetic data only. Headless approval records the user's decision, not independently verified formal rubric approval. Submission remains November 9.
+
+The original documentation below describes the previous implementation and its dated evidence. Test counts retain their original dates; they are not fresh rollback verification.
+
 **Multi-tenant dental scheduling, patient intake, and clinic-owned Shopify storefronts**  
 **Revision date:** October 26, 2026  
 **Status:** Revised proposal for review; implementation and launch are not represented as approved or completed.  

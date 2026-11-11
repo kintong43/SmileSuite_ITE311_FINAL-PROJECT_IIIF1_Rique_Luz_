@@ -1,6 +1,9 @@
 import { readFile } from 'node:fs/promises';
 import { test, expect } from '@playwright/test';
 
+const baseUrl = process.env.BROWSER_BASE_URL || 'http://smilesuite.localhost:8000';
+const clinicUrl = (subdomain) => baseUrl.replace('smilesuite.localhost', `${subdomain}.smilesuite.localhost`);
+
 test('real Directus editor publishes within its clinic and cannot cross the tenant boundary', async ({ page, request }) => {
     test.skip(process.env.CMS_LIVE_TEST !== '1', 'Requires the separately running synthetic CMS and ignored generated credentials.');
     const credentials = JSON.parse(await readFile('.runtime/cms-credentials.json', 'utf8'));
@@ -24,9 +27,9 @@ test('real Directus editor publishes within its clinic and cannot cross the tena
     const item = (await created.json()).data;
     try {
         expect(item.tenant_key).toBe('clinic-harbor');
-        await page.goto(`http://harbor.smilesuite.localhost:8000/content/${slug}`);
+        await page.goto(`${clinicUrl('harbor')}/content/${slug}`);
         await expect(page.getByRole('heading', { name: 'Synthetic publishing proof' })).toBeVisible();
-        expect((await page.goto(`http://cedar.smilesuite.localhost:8000/content/${slug}`)).status()).toBe(404);
+        expect((await page.goto(`${clinicUrl('cedar')}/content/${slug}`)).status()).toBe(404);
         expect((await request.patch(`${base}/items/ss_pages/${item.id}`, { headers, data: { title: 'Edited synthetic proof' } })).status()).toBe(200);
         const spoofed = await request.post(`${base}/items/ss_pages`, { headers, data: { tenant_key: 'clinic-cedar', slug: 'denied-spoof', title: 'Denied', status: 'draft' } });
         expect([400, 403]).toContain(spoofed.status());

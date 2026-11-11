@@ -1,5 +1,42 @@
 # Coursework verification — 27 October 2026
 
+## Fresh local verification — 11 November 2026
+
+The current Laravel + Directus headless CMS + Shopify retail implementation was checked again in response to the request to finish the project. Earlier dated evidence below remains historical.
+
+| Check | Fresh result |
+| --- | --- |
+| `./scripts/test.ps1` | **148 passed, 773 assertions**, 56.878 seconds; dedicated `smilesuite_testing`, nothing pending to migrate |
+| `npm run build` | Passed, Vite 8.3.5 |
+| Full Playwright suite, real CMS enabled | **6 passed, no skips**, 20.6 seconds |
+| `php artisan view:cache` using bundled PHP | Passed |
+| `php artisan config:show smilesuite` | Sandbox true; live billing, live commerce, real patient data all false |
+| `git diff --check` | Passed |
+
+The first browser attempt failed because Directus was still starting and port 8000 answered with an unrelated Python file server. Laravel was verified on port 8001, then the entire browser suite passed in one run. The CMS test now honors `BROWSER_BASE_URL`, matching the other browser specs, instead of hardcoding the application port. CMS endpoint selection still uses `CMS_URL`.
+
+Repeat with the local application on port 8001 and Directus on 8055:
+
+```powershell
+$env:CMS_LIVE_TEST = '1'
+$env:BROWSER_BASE_URL = 'http://smilesuite.localhost:8001'
+npx playwright test
+```
+
+The passing browser suite covered actual scoped CMS publish/edit/delete and cross-clinic denials, public content, profile/report navigation and CSV download, owner navigation, session isolation, responsive layout and sampled accessibility, patient booking/cancellation, and versioned intake. Temporary CMS proof content was removed by the test's cleanup.
+
+Completion limits: the local coursework demo is verified. Instructor invitation needs their GitHub username. No fresh remote CI/upload verification, external merchant checkout, live charge, public deployment, or production-readiness approval is claimed. Existing release gates still apply.
+
+Execution checkpoint: previous rollback owners had released all resources. This run used the disposable PHP-test database exclusively; PHP and browser suites are finished and their reservations are released. Local PostgreSQL, Laravel on 8001, and Directus remain running for the demo. Existing application edits, retained inert migration/history, and archived WordPress data were preserved. Only the CMS browser spec and these current verification notices were changed for this task. No shared vault board, dependencies, clinical schema, or live-data settings were changed; no commit or push was made.
+
+## Current decision — 3 November 2026
+
+The user approved the headless CMS approach and requested return to the previous system: **Laravel + Directus headless CMS + Shopify retail**. WordPress Multisite/WooCommerce is no longer the active target. Its dated implementation and QA evidence remain historical; reverting documentation does not prove application or runtime rollback completion.
+
+Confirmed subscription decision: **PHP 2,490/month or PHP 24,900/year per clinic location**, with monthly/annual Stripe/Cashier billing retained. Earlier price examples below are historical and do not establish configured provider prices. Keep live billing, live commerce and real-patient-data flags false; synthetic data only. Headless approval records the user's decision, not independently verified formal rubric approval. Submission remains November 9.
+
+The original documentation below describes the previous implementation and its dated evidence. Test counts retain their original dates; they are not fresh rollback verification.
+
 Environment: PHP 8.4.27, Laravel 13.38, PostgreSQL 16.15, Node 24 for the application, Node 22.23.4 and Directus 11.17.4 for the isolated CMS. All records and identities used were synthetic. PHP tests use `smilesuite_testing`; browser and CMS tests use the local demo application/CMS databases. Do not run competing PHP test suites against the same test database.
 
 | Check | Executed result |
