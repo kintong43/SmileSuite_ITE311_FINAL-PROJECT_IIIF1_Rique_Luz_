@@ -1,41 +1,45 @@
 # SmileSuite
 
-## Local coursework verification — 11 November 2026
-
-The restored Laravel + Directus + Shopify demo passed fresh verification: **148 PHP tests / 773 assertions**, **all six browser workflows with the real local CMS enabled**, frontend production build, and Blade template compilation. This verifies the local synthetic-data demo; external Shopify checkout and live Stripe payments are not established by these checks.
-
-The current demo runs at [SmileSuite](http://smilesuite.localhost:8001), [Harbor](http://harbor.smilesuite.localhost:8001/login), and [Cedar](http://cedar.smilesuite.localhost:8001/login). Directus runs at [the CMS editor](http://127.0.0.1:8055/admin). Port 8001 bypasses an unrelated Python file server answering on port 8000 on this machine. The scripts' default remains 8000; use `./scripts/start-local.ps1 -Port 8001` when that port conflict is present.
-
-See [fresh verification and remaining submission items](docs/coursework/VERIFICATION.md#fresh-local-verification--11-november-2026). The instructor invitation still needs the instructor's GitHub username. No new commit, push, invitation, or production deployment was performed.
-
-## Current decision — 3 November 2026
-
-The user approved the headless CMS approach and requested return to the previous system: **Laravel + Directus headless CMS + Shopify retail**. WordPress Multisite/WooCommerce is no longer the active target. Its dated implementation and QA evidence remain historical; reverting documentation does not prove application or runtime rollback completion.
-
-Confirmed subscription decision: **PHP 2,490/month or PHP 24,900/year per clinic location**, with monthly/annual Stripe/Cashier billing retained. Earlier price examples below are historical and do not establish configured provider prices. Keep live billing, live commerce and real-patient-data flags false; synthetic data only. Headless approval records the user's decision, not independently verified formal rubric approval. Submission remains November 9.
-
-The original documentation below describes the previous implementation and its dated evidence. Test counts retain their original dates; they are not fresh rollback verification.
+SmileSuite is a multi-tenant SaaS for independent dental clinics: clinic accounts, scheduling and patient booking, versioned intake and encounter notes, tenant subscription billing, operational reports, and optional clinic-owned Shopify storefronts. Each clinic gets its own subdomain, and public clinic content is managed in a headless CMS. It is a local, synthetic-data MVP built with Laravel 13, PHP 8.4, PostgreSQL 16, Blade, Alpine, Tailwind and Vite. The lockfiles are the installed version record.
 
 **Students:** Kenji B. Rique and Samuael D. Luz  
-**Program / Year / Section:** Bachelor of Science in Information Technology (BSIT), III F1  
-**Courses:** Web Systems and Technologies 2; System Integration and Architecture 1
+**Program / Year / Section:** BSIT III F1  
+**Courses:** Web Systems and Technologies 2; System Integration and Architecture 1  
+**Repository:** `SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_`
 
-SmileSuite is a local, synthetic-data MVP for independent dental clinics: clinic accounts, scheduling, versioned intake and encounter notes, tenant billing, and optional clinic-owned Shopify storefronts. It uses Laravel 13, PHP 8.4, PostgreSQL 16, Blade, Alpine, Tailwind and Vite. The dependency lockfiles are the installed version record.
+This implementation is for development and review. Live billing, live commerce and real-patient-data flags are disabled by default, and all data is synthetic. It does not establish production readiness or regulatory approval.
 
-This implementation is for development and review. It does not establish production readiness, regulatory approval, approved prices, or permission to use real patient data. Live billing, live commerce and real-patient-data flags default to disabled. See [the revised system plan](docs/smilesuite_system_plan_v2.md), particularly its Section 12 decision register, and [implementation evidence](docs/IMPLEMENTATION.md).
+## Architecture and course requirements
+
+The instructor asked for a real CMS product and a SaaS. SmileSuite meets that as follows:
+
+| Requirement | What SmileSuite provides |
+| --- | --- |
+| CMS product | **Directus 11.17.4** (headless CMS, approved approach) running as a separate service with its own database and scoped API tokens. Laravel reads pages, announcements and service descriptions through its REST API. See [CMS setup](docs/coursework/CMS.md). |
+| SaaS | Multi-tenant Laravel application (Harbor and Cedar demo clinics, platform admin host), role-based access (owner, practitioner, receptionist, patient), MFA for staff, audited tenant lifecycle. |
+| Subscription billing | Stripe/Cashier monthly and annual plans: **PHP 2,490/month or PHP 24,900/year per clinic location**. Sandbox only; live billing is off. |
+| Retail | Optional per-clinic Shopify storefront integration. Live commerce is off. |
+| Reports and profiles | Role-gated operational reports with CSV export; self-service profile and password change. |
+
+An earlier WordPress Multisite/WooCommerce experiment (3 November 2026) was abandoned and is not part of this system. The unused `wordpress_site_url` and `wordpress_retail_enabled` columns on `tenants` come from that experiment's already-applied migration, which is kept as history.
+
+## Verification status (11 November 2026)
+
+148 PHP tests (773 assertions), the frontend production build, and six browser workflows with the real local Directus CMS all passed. GitHub Actions CI passes on `main`. External Shopify checkout and live Stripe charges are not exercised. Details: [verification](docs/coursework/VERIFICATION.md).
 
 ## Coursework deliverables
-
-The course alignment adds self-service profiles and password changes, role-gated operational reports with CSV export, and an actual Directus CMS integration for public pages, announcements, service descriptions, safe staff data and aggregate reports. CMS identities and its database are separate from the clinic application.
 
 - [Requirements and submission checklist](docs/coursework/REQUIREMENTS.md)
 - [Business proposal](docs/coursework/BUSINESS_PROPOSAL.md) and [SRS](docs/coursework/SRS.md)
 - [System design: use cases, context, architecture, ERDs and wireframes](docs/coursework/SYSTEM_DESIGN.md)
-- [Database schema and complete data dictionary](docs/coursework/DATABASE_SCHEMA.md)
-- [CMS setup and real integration evidence](docs/coursework/CMS.md)
+- [Database schema and data dictionary](docs/coursework/DATABASE_SCHEMA.md)
+- [CMS setup and integration evidence](docs/coursework/CMS.md)
 - [Demonstration guide](docs/coursework/DEMO_GUIDE.md), [verification](docs/coursework/VERIFICATION.md), and [Git lab evidence](docs/coursework/GIT_LAB_EVIDENCE.md)
+- [Revised system plan](docs/smilesuite_system_plan_v2.md) and [implementation evidence](docs/IMPLEMENTATION.md)
 
-The instructor's GitHub username has not been provided. The collaborator invitation is pending. The repository uses the student-selected group name `SmileSuite_ITE311_FINAL-PROJECT_IIIF1_Rique_Luz_`.
+## Demo access
+
+After seeding, open `http://smilesuite.localhost:8000` (platform), `http://harbor.smilesuite.localhost:8000/login` or `http://cedar.smilesuite.localhost:8000/login`. Each clinic login page has demo buttons for owner, practitioner, receptionist and patient. Seeded accounts use `<role>@<clinic>.example.test` (for example `owner@harbor.example.test`) with the synthetic password `SmileSuite-demo-2026!`, which exists only in local/testing seeds. The Directus editor runs at `http://127.0.0.1:8055/admin` (see the CMS setup doc for starting it). Browsers normally resolve `.localhost` names to loopback; if yours does not, add `smilesuite.localhost`, `harbor.smilesuite.localhost`, `cedar.smilesuite.localhost` and `admin.smilesuite.localhost` to your hosts file. The default port is 8000; use another (for example 8001) if something else already listens there, and update `APP_URL`.
 
 ## Clone and run
 
@@ -136,7 +140,7 @@ npm run build
 
 `test.ps1` sets PostgreSQL database `smilesuite_testing`, clears cached configuration, applies pending migrations without resetting the database, then runs PHPUnit. It restores process environment variables afterward. It does not create the test database. Run tests serially against a dedicated local test database, away from another developer's run. Do not use `migrate:fresh` on shared databases. CI provisions a fresh PostgreSQL 16 service, applies the same migrations and runs the integration suite; Redis 7.4 is also available to CI. CI uses disposable synthetic-only keys and credentials.
 
-The CI definition is [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It installs lockfile dependencies with Composer/npm, builds assets and runs tests on PHP 8.4. The suite refreshes the disposable test schema. Final local verification passed 114 PostgreSQL tests with 566 assertions and three browser workflows. With the local server running, run `npx playwright install chromium` followed by `npx playwright test` for the browser checks. See the implementation evidence for scope and limitations.
+The CI definition is [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It installs lockfile dependencies with Composer/npm, builds assets and runs tests on PHP 8.4. The suite refreshes the disposable test schema. Latest local verification: 148 tests with 773 assertions and six browser workflows (see Verification status above). With the local server running, run `npx playwright install chromium` followed by `npx playwright test` for the browser checks. See the implementation evidence for scope and limitations.
 
 ## Container deployment candidate
 

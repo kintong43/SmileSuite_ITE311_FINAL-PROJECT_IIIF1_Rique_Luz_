@@ -25,17 +25,7 @@ npx playwright test
 
 The passing browser suite covered actual scoped CMS publish/edit/delete and cross-clinic denials, public content, profile/report navigation and CSV download, owner navigation, session isolation, responsive layout and sampled accessibility, patient booking/cancellation, and versioned intake. Temporary CMS proof content was removed by the test's cleanup.
 
-Completion limits: the local coursework demo is verified. Instructor invitation needs their GitHub username. No fresh remote CI/upload verification, external merchant checkout, live charge, public deployment, or production-readiness approval is claimed. Existing release gates still apply.
-
-Execution checkpoint: previous rollback owners had released all resources. This run used the disposable PHP-test database exclusively; PHP and browser suites are finished and their reservations are released. Local PostgreSQL, Laravel on 8001, and Directus remain running for the demo. Existing application edits, retained inert migration/history, and archived WordPress data were preserved. Only the CMS browser spec and these current verification notices were changed for this task. No shared vault board, dependencies, clinical schema, or live-data settings were changed; no commit or push was made.
-
-## Current decision — 3 November 2026
-
-The user approved the headless CMS approach and requested return to the previous system: **Laravel + Directus headless CMS + Shopify retail**. WordPress Multisite/WooCommerce is no longer the active target. Its dated implementation and QA evidence remain historical; reverting documentation does not prove application or runtime rollback completion.
-
-Confirmed subscription decision: **PHP 2,490/month or PHP 24,900/year per clinic location**, with monthly/annual Stripe/Cashier billing retained. Earlier price examples below are historical and do not establish configured provider prices. Keep live billing, live commerce and real-patient-data flags false; synthetic data only. Headless approval records the user's decision, not independently verified formal rubric approval. Submission remains November 9.
-
-The original documentation below describes the previous implementation and its dated evidence. Test counts retain their original dates; they are not fresh rollback verification.
+Completion limits: the local coursework demo is verified. Instructor invitation needs their GitHub username. Remote CI passed on the merged `main` commit (11 November 2026). No external merchant checkout, live charge, public deployment, or production-readiness approval is claimed. Existing release gates still apply.
 
 Environment: PHP 8.4.27, Laravel 13.38, PostgreSQL 16.15, Node 24 for the application, Node 22.23.4 and Directus 11.17.4 for the isolated CMS. All records and identities used were synthetic. PHP tests use `smilesuite_testing`; browser and CMS tests use the local demo application/CMS databases. Do not run competing PHP test suites against the same test database.
 
