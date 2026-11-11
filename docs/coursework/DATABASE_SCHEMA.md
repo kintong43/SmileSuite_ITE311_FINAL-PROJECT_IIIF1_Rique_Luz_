@@ -1,12 +1,6 @@
 # SmileSuite database schema
 
-## Current decision — 3 November 2026
-
-The user approved the headless CMS approach and requested return to the previous system: **Laravel + Directus headless CMS + Shopify retail**. WordPress Multisite/WooCommerce is no longer the active target. Its dated implementation and QA evidence remain historical; reverting documentation does not prove application or runtime rollback completion.
-
-Confirmed subscription decision: **PHP 2,490/month or PHP 24,900/year per clinic location**, with monthly/annual Stripe/Cashier billing retained. Earlier price examples below are historical and do not establish configured provider prices. Keep live billing, live commerce and real-patient-data flags false; synthetic data only. Headless approval records the user's decision, not independently verified formal rubric approval. Submission remains November 9.
-
-The original documentation below describes the previous implementation and its dated evidence. Test counts retain their original dates; they are not fresh rollback verification.
+> **Architecture:** Laravel + Directus (headless CMS) + Shopify retail, with Stripe/Cashier billing in sandbox. See the [README](../../README.md#architecture-and-course-requirements). The 3 November WordPress experiment was abandoned and is not part of this system.
 
 **Authors:** Kenji B. Rique and Samuael D. Luz — BSIT III F1  
 **Courses:** Web Systems and Technologies 2; System Integration and Architecture 1  
@@ -45,6 +39,8 @@ The following actual tables satisfy the requirement for at least five relational
 | `care_assignments` | `id` bigint PK; tenant-consistent patient/practitioner/grantor FKs; validity/revocation fields | Explicit clinical delegation in addition to current appointment assignment. |
 
 Additional domain tables cover clinic hours, practitioner shifts/breaks, dated schedule blocks, staff invitations, consent records, idempotency requests, subscriptions/items, entitlements, checkout sessions, Shopify connections/carts, webhook events, outbox messages, notification deliveries, and tenant/platform audits. Platform identities are in `platform_admins`, separate from clinic `users`. Framework tables for sessions, queues, failed jobs, cache, migrations, and password-reset tokens remain in the full dictionary.
+
+> Note: `tenants.wordpress_site_url` and `tenants.wordpress_retail_enabled` are unused leftovers from an abandoned WordPress experiment. The migration is kept as history; no feature reads them.
 
 ## Cardinality and referential integrity
 
